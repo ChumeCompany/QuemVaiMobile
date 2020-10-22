@@ -1,0 +1,12 @@
+{
+  "name": "QuemVai-Mobile",
+  "displayName": "QuemVai-Mobile",
+  "expo": {
+    "name": "QuemVai-Mobile",
+    "slug": "QuemVai-Mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
