@@ -20,7 +20,7 @@ function SignupProvider({ children }) {
     const emailValidate = inputValidate.validateEmail(email);
     const dddValidate = inputValidate.validateDDD(ddd);
     const cellphoneValidate = inputValidate.validateCellphone(cellphone);
-    console.log(photo);
+    
     if (
       emailValidate == false ||
       dddValidate == false ||
@@ -39,7 +39,7 @@ function SignupProvider({ children }) {
           username: nickname,
         };
         try {
-          console.log('aqui2');
+          
           const response = await api.post("/login/signup/user", data, {
             headers: { "x-password": password },
           });
@@ -58,11 +58,11 @@ function SignupProvider({ children }) {
           photos: photo,
         };
         try {
-          console.log('aqui3');
+          
           const response = await api.post("/login/signup/user", data, {
             headers: { "x-password": password },
           });
-          console.log(response);
+          
           signIn(email, password);
           alert("Deu certo");
         } catch (err) {
