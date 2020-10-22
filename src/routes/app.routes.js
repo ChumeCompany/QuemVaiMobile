@@ -1,14 +1,20 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Ionicons } from "@expo/vector-icons";
 
 const AppTab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 import Home from "../pages/Home";
 import Esportes from "../pages/Esportes";
 import Eventos from "../pages/Eventos";
 import Quadras from "../pages/Quadras";
 import Amigos from "../pages/Amigos";
+
+//
+
+import Perfil from "../pages/Perfil";
 
 const icons = {
   Home: {
@@ -27,6 +33,7 @@ const icons = {
     name: "ios-navigate",
   },
 };
+
 
 function AppRoutes() {
   return (
@@ -53,5 +60,7 @@ function AppRoutes() {
     </AppTab.Navigator>
   );
 }
+
+
 
 export default AppRoutes;
