@@ -8,6 +8,8 @@ export const AuthContext = createContext({});
 function AuthProvider({ children }) {
   const [signed, setSigned] = useState(false);
   const [token, setToken] = useState("");
+  const [perfil,setPerfil] = useState(false);
+  const [search,setSearch] = useState(false);
   const [userInfo, setUserInfo] = useState("");
 
   useEffect(() => {
@@ -27,9 +29,16 @@ function AuthProvider({ children }) {
       setSigned(false);
       setToken("");
       setUserInfo("");
+      setPerfil(false);
     } catch (err) {
       alert(err);
     }
+  }
+  function perfilNavigation(){
+    setPerfil(true);
+  }
+  function searchNavigation(status){
+    setSearch(status);
   }
 
   async function getInfo(token) {
@@ -71,7 +80,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signed, userInfo, token, signIn, signOut, getInfo }}
+      value={{ signed, userInfo, token,setToken, signIn, signOut, getInfo,searchNavigation,perfilNavigation,perfil,search }}
     >
       {children}
     </AuthContext.Provider>

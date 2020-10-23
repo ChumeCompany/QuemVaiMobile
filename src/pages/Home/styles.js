@@ -36,6 +36,6 @@ export const IconButton = styled.TouchableOpacity`
   box-shadow: 11.81589px 12.26986px 10.907943px rgba(0, 0, 0, 0.25);
 `;
 export const PerfilButton = styled.TouchableOpacity`
-  margin-left: 68%;
+  margin-left: 72%;
   margin-top: 67px;
 `;

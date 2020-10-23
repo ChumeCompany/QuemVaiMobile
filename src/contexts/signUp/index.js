@@ -79,7 +79,8 @@ function SignupProvider({ children }) {
       let data = { email: email };
 
       try {
-        await api.post("api/login/unlockpass", data);
+       const response =  await api.post("/login/unlockpass", data);
+       console.log(response["status"]);
         alert("Um email com sua nova senha foi enviada ao seu email");
       } catch (err) {
         alert(err);

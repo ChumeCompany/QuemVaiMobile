@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useContext} from "react";
 import { ScrollView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 

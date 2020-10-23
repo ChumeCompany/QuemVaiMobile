@@ -1,8 +1,10 @@
 import React, { useContext, useEffect,useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { AppLoading } from 'expo';
 
 import { AuthContext } from "../../contexts/auth";
+
 
 import {
   SearchBar,
@@ -14,21 +16,27 @@ import {
 } from "./styles";
 
 function Home() {
-  const { signOut, getInfo, token } = useContext(AuthContext);
-  const [infoUser,SetInfoUser] = useState(null);
+  const { signOut, getInfo, token,perfilNavigation,searchNavigation } = useContext(AuthContext);
+  const [infoUser,SetInfoUser] = useState({davi:1});
+  const [load,setLoad] = useState(false);
   
   useEffect(() => {
     async function initialize(){
     try {
       const result = await getInfo(token);
       SetInfoUser(result);
+      setLoad(true);
     } catch (err) {
       signOut();
     }
 }
 initialize();
   }, []);
-  
+  if(load == false){
+    return(
+    <AppLoading/>
+    );
+  }
   return (
     <Container>
       <MapView
@@ -46,8 +54,8 @@ initialize();
         <IconButton onPress={() => signOut()}>
           <Ionicons name="ios-search" size={28} color={"#F06543"} />
         </IconButton>
-        <PerfilButton>
-          <ImageBubble source={{uri:"https://quemvai.blob.core.windows.net/fotos/5722e02d-3b52-901b-475c-28f24840fbd3.jpg"}} />
+        <PerfilButton onPress={()=>perfilNavigation()} >
+          <ImageBubble source={{uri:infoUser["info"]["photos"]}} />
         </PerfilButton>
       </HeaderView>
     </Container>

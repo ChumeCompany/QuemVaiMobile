@@ -6,6 +6,7 @@ import { AppLoading } from "expo";
 import Routes from "./src/routes/index";
 import AuthProvider from "./src/contexts/auth";
 import SignUpProvider from "./src/contexts/signUp";
+import ManagerProvider from "./src/contexts/userManagerInfo/index";
 
 import {
   useFonts,
@@ -30,7 +31,9 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <SignUpProvider>
-          <Routes />
+          <ManagerProvider>
+            <Routes />
+          </ManagerProvider>
         </SignUpProvider>
       </AuthProvider>
     </NavigationContainer>
