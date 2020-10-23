@@ -20,28 +20,27 @@ export default function Perfil() {
         <Tittle>Perfil</Tittle>
         <Label>Nome</Label>
         <AreaCell>
-        <Input placeholder="Digite seu nome" />
-        <Icon>
-          <MaterialIcons name="edit" size={32} color={"#000"} />
-        </Icon>
+          <Input placeholder="Digite seu nome" />
+          <Icon>
+            <MaterialIcons name="edit" size={32} color={"#000"} />
+          </Icon>
         </AreaCell>
 
-        
         <Label>Apelido</Label>
 
         <AreaCell>
-        <Input placeholder="Digite seu apelido" />
-        <Icon>
-          <MaterialIcons name="edit" size={32} color={"#000"} />
-        </Icon>
+          <Input placeholder="Digite seu apelido" />
+          <Icon>
+            <MaterialIcons name="edit" size={32} color={"#000"} />
+          </Icon>
         </AreaCell>
-        
+
         <Label>Email</Label>
         <AreaCell>
-        <Input placeholder="Digite seu email" />
-        <Icon>
-          <MaterialIcons name="edit" size={32} color={"#000"} />
-        </Icon>
+          <Input placeholder="Digite seu email" />
+          <Icon>
+            <MaterialIcons name="edit" size={32} color={"#000"} />
+          </Icon>
         </AreaCell>
 
         <Label>Celular</Label>
@@ -49,8 +48,8 @@ export default function Perfil() {
           <Ddd placeholder="DDD" />
           <CellNumber placeholder="Digite seu numero" />
           <Icon>
-          <MaterialIcons name="edit" size={32} color={"#000"} />
-        </Icon>
+            <MaterialIcons name="edit" size={32} color={"#000"} />
+          </Icon>
         </AreaCell>
 
         <Blank></Blank>
@@ -58,7 +57,7 @@ export default function Perfil() {
           <SubmitText>Editar dados</SubmitText>
         </AreaSubmit>
         <AreaLine>
-          <LineText>Deletar Contas</LineText>
+          <LineText>Deletar Conta</LineText>
         </AreaLine>
         <Blank></Blank>
       </ScrollView>

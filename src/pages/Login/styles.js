@@ -14,7 +14,7 @@ export const LogoArea = styled.View`
 `;
 
 export const Oval = styled.View`
-  margin-top: 33%;
+  margin-top: 28%;
   background-color: #3edaa8;
   width: 110px;
   height: 110px;
