@@ -80,7 +80,6 @@ function SignupProvider({ children }) {
 
       try {
        const response =  await api.post("/login/unlockpass", data);
-       console.log(response["status"]);
         alert("Um email com sua nova senha foi enviada ao seu email");
       } catch (err) {
         alert(err);
