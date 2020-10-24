@@ -97,8 +97,19 @@ export default function Perfil({navigate}) {
         </AreaCell>
 
         <Blank></Blank>
-        <AreaSubmit >
-          <SubmitText onPress={()=>{alterarDados(nome,apelido,cellphone,email,ddd,token);navigate.navigation("Perfil")}} >Editar dados</SubmitText>
+        <AreaSubmit onPress={
+           async ()=>{
+              if(nome == "" || apelido == "" || cellphone == "" || email == "" || ddd =="")
+              {
+              
+                alert("Verifique se não há campos em branco");
+              }
+              else
+              {
+                await alterarDados(nome,apelido,cellphone,email,ddd,token);
+                navigate.navigation("Perfil");
+              }}} >
+          <SubmitText> Editar dados</SubmitText>
         </AreaSubmit>
         <AreaLine>
           <LineText>Deletar Conta</LineText>
