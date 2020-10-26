@@ -21,6 +21,7 @@ import { Tittle, Input, Ddd, CellNumber, Icon } from "./styles";
 export default function Perfil({navigate}) {
   const [loading,SetLoading]=useState(false);
   const [infoUser,setInfoUser]=useState({davi:1});
+  const [saving,setSaving] = useState(false);
 
   const [editNome,setEditNome] = useState(false);
   const [editApelido,setEditApelido] = useState(false);
@@ -51,6 +52,20 @@ export default function Perfil({navigate}) {
     }
     initialize();
   },[]);
+  useEffect(()=>{
+    async function initialize(){
+      try{
+        const response = await getInfo(token);
+        setInfoUser(response);
+        SetLoading(true);
+      }
+      catch(err){
+        signOut();
+        alert(err);
+      }
+    }
+    initialize();
+  },[saving]);
   
   if(loading == false){
     return (
@@ -99,16 +114,93 @@ export default function Perfil({navigate}) {
         <Blank></Blank>
         <AreaSubmit onPress={
            async ()=>{
-              if(nome == "" || apelido == "" || cellphone == "" || email == "" || ddd =="")
+              if(editNome == false || nome == "" )
               {
-              
-                alert("Verifique se não há campos em branco");
+                setNome(infoUser["info"]["name"]);
+                if(editApelido == false || apelido == ""){
+                  setApelido(infoUser["info"]["username"]);
+                }
+                if(editEmail == false || email == ""){
+                  setEmail(infoUser["info"]["email"]);
+                }
+                if(editCellphone==false){
+                  if(ddd == ""){
+                    setDDD(infoUser["info"]["DDD"]);
+                  }
+                  else if(cellphone == ""){
+                    setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                  }
+                  setDDD(infoUser["info"]["DDD"]);
+                  setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                }
               }
-              else
-              {
-                await alterarDados(nome,apelido,cellphone,email,ddd,token);
-                navigate.navigation("Perfil");
-              }}} >
+              else if(editApelido == false || apelido == ""){
+                setApelido(infoUser["info"]["username"]);
+                if(editNome== false || nome == ""){
+                  setNome(infoUser["info"]["name"]);
+                }
+                if(editEmail == false || email == ""){
+                  setEmail(infoUser["info"]["email"]);
+                }
+                if(editCellphone==false){
+                  if(ddd == ""){
+                    setDDD(infoUser["info"]["DDD"]);
+                  }
+                  else if(cellphone == ""){
+                    setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                  }
+                  setDDD(infoUser["info"]["DDD"]);
+                  setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                }
+              }
+              else if(editEmail == false || email == ""){
+                setEmail(infoUser["info"]["email"]);
+                if(editNome== false || nome ==""){
+                  setNome(infoUser["info"]["name"]);
+                }
+                if(editApelido==false || apelido == ""){
+                  setApelido(infoUser["info"]["username"]);
+                }
+                if(editCellphone==false){
+                  if(ddd == ""){
+                    setDDD(infoUser["info"]["DDD"]);
+                  }
+                  else if(cellphone == ""){
+                    setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                  }
+                  setDDD(infoUser["info"]["DDD"]);
+                  setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                }
+              }
+              else if(editCellphone==false){
+                if(ddd == ""){
+                  setDDD(infoUser["info"]["DDD"]);
+                }
+                else if(cellphone == ""){
+                  setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                }
+                setDDD(infoUser["info"]["DDD"]);
+                  setCellphone(infoUser["info"]["cellPhoneNumber"]);
+                
+                if(editNome== false || nome == ""){
+                  setNome(infoUser["info"]["name"]);
+                }
+                if(editApelido==false || apelido == ""){
+                  setApelido(infoUser["info"]["username"]);
+                }
+                if(editEmail==false || email == ""){
+                  setEmail(infoUser["info"]["email"]);
+                }
+              }
+              await alterarDados(nome,apelido,cellphone,email,ddd,token);
+                setEditApelido(false);
+                setEditCellphone(false);
+                setEditEmail(false);
+                setEditNome(false);
+                setSaving(true);
+              
+                
+              }} >
           <SubmitText> Editar dados</SubmitText>
         </AreaSubmit>
         <AreaLine onPress={()=>{deletarUsuario();signOut()}}>
