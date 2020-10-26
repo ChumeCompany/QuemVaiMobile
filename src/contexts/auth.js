@@ -37,6 +37,9 @@ function AuthProvider({ children }) {
   function perfilNavigation(){
     setPerfil(true);
   }
+  function homeNavigation(){
+    setPerfil(false);
+  }
   function searchNavigation(status){
     setSearch(status);
   }
@@ -80,7 +83,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signed, userInfo, token,setToken, signIn, signOut, getInfo,searchNavigation,perfilNavigation,perfil,search }}
+      value={{ signed, userInfo, token,setToken, signIn, signOut, getInfo,searchNavigation,perfilNavigation,homeNavigation,perfil,search }}
     >
       {children}
     </AuthContext.Provider>

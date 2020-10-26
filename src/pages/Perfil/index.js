@@ -16,7 +16,8 @@ import {
   LineText,
 } from "../Login/styles";
 import { AreaCell, Blank } from "../Cadastro/styles";
-import { Tittle, Input, Ddd, CellNumber, Icon } from "./styles";
+import { Tittle, Input, Ddd, CellNumber, Icon,View,VoltarArea,SairArea,VoltarTxt,SairTxt } from "./styles";
+
 
 export default function Perfil({navigate}) {
   const [loading,SetLoading]=useState(false);
@@ -34,7 +35,7 @@ export default function Perfil({navigate}) {
   const [ddd,setDDD] = useState("");
   const [email,setEmail] = useState("");
 
-  const {signOut, getInfo, token} = useContext(AuthContext);
+  const {signOut, getInfo, token,homeNavigation} = useContext(AuthContext);
   const {alterarDados,deletarUsuario} = useContext(UserManagerContext);
 
  
@@ -76,7 +77,19 @@ export default function Perfil({navigate}) {
   return (
     <Container>
       <ScrollView>
+        <View>
         <Tittle>Perfil</Tittle>
+        <VoltarArea onPress={()=>homeNavigation()}>
+          <VoltarTxt>
+            Voltar
+          </VoltarTxt>
+        </VoltarArea>
+        <SairArea onPress={()=>signOut()} >
+          <SairTxt>
+            Sair
+          </SairTxt>
+        </SairArea>
+        </View>
         <Label>Nome</Label>
         <AreaCell>
           <Input placeholder={infoUser["info"]["name"]} value={nome} onChangeText={(text)=>setNome(text)}  editable={editNome} />
