@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import {
   Label,
@@ -24,6 +25,7 @@ import {
 } from "./styles";
 
 import { SignupContext } from "../../contexts/signUp";
+import { Image } from "react-native-svg";
 
 export default function Cadastro({ navigation }) {
   const { signUp } = useContext(SignupContext);
@@ -32,9 +34,10 @@ export default function Cadastro({ navigation }) {
   const [nickname, setNickname] = useState("");
   const [ddd, setDdd] = useState("");
   const [cellPhone, setCellPhone] = useState("");
-  const [photo, setPhoto] = useState(null);
+  //const [photo, setPhoto] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  var photo;
 
   useEffect(() => {
     (async () => {
@@ -62,15 +65,12 @@ export default function Cadastro({ navigation }) {
       allowsEditing: true,
       aspect: [3, 4],
       quality: 1,
-      base64: true,
+      base64:true
     });
-
-    setPhoto(result["base64"]);
-    
-
-
+    const image = 'data:image/jpeg;base64,' + result["base64"];
+    await AsyncStorage.setItem("@photo",image);
     if (!result.cancelled) {
-      setPhoto("");
+      photo="";
     }
   }
 
@@ -87,7 +87,7 @@ export default function Cadastro({ navigation }) {
     ) {
       alert("Verifique se há campos em branco");
     } else {
-      signUp(email, name, nickname, ddd, cellPhone, photo, password);
+      signUp(email, name, nickname, ddd, cellPhone, password);
     }
   }
   return (

@@ -2,7 +2,9 @@ import React, { useEffect, createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import inputValidate from "../utils/inputValidation";
 
+
 import { AuthContext } from "../auth";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export const SignupContext = createContext({});
 
@@ -14,13 +16,12 @@ function SignupProvider({ children }) {
     nickname,
     ddd,
     cellphone,
-    photo,
     password
   ) {
     const emailValidate = inputValidate.validateEmail(email);
     const dddValidate = inputValidate.validateDDD(ddd);
     const cellphoneValidate = inputValidate.validateCellphone(cellphone);
-    
+    var photo = await AsyncStorage.getItem("@photo");
     if (
       emailValidate == false ||
       dddValidate == false ||
@@ -55,17 +56,23 @@ function SignupProvider({ children }) {
           DDD: parseInt(ddd),
           name: name,
           username: nickname,
-          photos: photo,
+          photos: photo["uri"],
         };
         try {
           
-          const response = await api.post("/login/signup/user", data, {
+          const response = await api.post("/login/signup/user", {cellPhoneNumber: parseInt(cellphone),
+            email: email,
+            DDD: parseInt(ddd),
+            name: name,
+            username: nickname,
+            photos: photo,}, {
             headers: { "x-password": password },
           });
-          
+          await AsyncStorage.removeItem("@photo");
           signIn(email, password);
           alert("Deu certo");
         } catch (err) {
+          
           alert(err);
         }
       }
