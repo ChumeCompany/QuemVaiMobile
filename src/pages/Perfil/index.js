@@ -34,7 +34,7 @@ export default function Perfil({navigate}) {
   const [email,setEmail] = useState("");
 
   const {signOut, getInfo, token} = useContext(AuthContext);
-  const {alterarDados} = useContext(UserManagerContext);
+  const {alterarDados,deletarUsuario} = useContext(UserManagerContext);
 
  
   useEffect(()=>{
@@ -64,7 +64,7 @@ export default function Perfil({navigate}) {
         <Tittle>Perfil</Tittle>
         <Label>Nome</Label>
         <AreaCell>
-          <Input placeholder={"Digite seu nome"} value={infoUser["info"]["name"]} onChangeText={(text)=>setNome(text)}  editable={editNome} />
+          <Input placeholder={infoUser["info"]["name"]} value={nome} onChangeText={(text)=>setNome(text)}  editable={editNome} />
           <Icon onPress={()=>{editNome ? setEditNome(false):setEditNome(true)}}>
             <MaterialIcons name="edit" size={32} color={"#000"} />
           </Icon>
@@ -73,7 +73,7 @@ export default function Perfil({navigate}) {
         <Label>Apelido</Label>
 
         <AreaCell>
-          <Input placeholder={"Digite seu apelido"} value={infoUser["info"]["username"]} onChangeText={(text)=>setApelido(text)}  editable={editApelido} />
+          <Input placeholder={infoUser["info"]["username"]} value={apelido} onChangeText={(text)=>setApelido(text)}  editable={editApelido} />
           <Icon onPress={()=>{editApelido ? setEditApelido(false):setEditApelido(true)}}>
             <MaterialIcons name="edit" size={32} color={"#000"} />
           </Icon>
@@ -81,7 +81,7 @@ export default function Perfil({navigate}) {
 
         <Label>Email</Label>
         <AreaCell>
-          <Input placeholder={"Digite seu email"} value={infoUser["info"]["email"]} onChangeText={(text)=>setEmail(text)}  editable={editEmail} />
+          <Input placeholder={infoUser["info"]["email"]} value={email} onChangeText={(text)=>setEmail(text)}  editable={editEmail} />
           <Icon onPress={()=>{editEmail ? setEditEmail(false):setEditEmail(true)}}>
             <MaterialIcons name="edit" size={32} color={"#000"} />
           </Icon>
@@ -89,8 +89,8 @@ export default function Perfil({navigate}) {
 
         <Label>Celular</Label>
         <AreaCell>
-          <Ddd placeholder={"DDD"} editable={editCellphone} onChangeText={(text)=>setDDD(text)}   />
-          <CellNumber placeholder={"Celular"} editable={editCellphone} onChangeText={(text)=>setCellphone(text)}   />
+          <Ddd placeholder={infoUser["info"]["DDD"].toString()} value={ddd}  editable={editCellphone} onChangeText={(text)=>setDDD(text)}   />
+          <CellNumber placeholder={infoUser["info"]["cellPhoneNumber"].toString()} value={cellphone} editable={editCellphone} onChangeText={(text)=>setCellphone(text)}   />
           <Icon onPress={()=>{editCellphone ? setEditCellphone(false) : setEditCellphone(true)}}>
             <MaterialIcons name="edit" size={32} color={"#000"} />
           </Icon>
@@ -111,7 +111,7 @@ export default function Perfil({navigate}) {
               }}} >
           <SubmitText> Editar dados</SubmitText>
         </AreaSubmit>
-        <AreaLine>
+        <AreaLine onPress={()=>{deletarUsuario();signOut()}}>
           <LineText>Deletar Conta</LineText>
         </AreaLine>
         <Blank></Blank>

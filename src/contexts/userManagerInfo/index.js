@@ -24,6 +24,39 @@ function UserManagerProvider({children}){
       alert(err);
     }
   }
+  
+  async function atualizarFoto(){
+    try{
+      let photo = await AsyncStorage.getItem("@photo");
+      if(!photo){
+        alert("Selecione alguma foto");
+      }
+      const response = await api.put("/user/update/me/photo",{"photos":photo},{headers:{"x-auth-token":token}});
+      await AsyncStorage.removeItem("@photo");
+      alert("deu certo");
+    }
+    catch(err){
+      alert(err);
+    }
+  }
+  async function deletarUsuario(){
+    try{
+      const response = await api.put("/user/delete/me",{},{headers:{"x-auth-token":token}});
+    }
+    catch(err){
+      alert(err);
+    }
+  }
+
+  async function apagarFoto(){
+    try{
+      const response = await api.put("/user/delete/me/photo",{},{headers:{"x-auth-token":token}});
+      alert("deu certo");
+    }
+    catch(err){
+      alert(err);
+    }
+  }
 
   async function alterarDados(name,username,cellphoneNumber,email,DDD,token){
     const dddStatus = validateDDD(DDD);
@@ -39,7 +72,7 @@ function UserManagerProvider({children}){
   }
 
   return(
-    <UserManagerContext.Provider value={{updatePassword,alterarDados}}>
+    <UserManagerContext.Provider value={{updatePassword,alterarDados,apagarFoto,atualizarFoto,deletarUsuario}}>
       {children}
     </UserManagerContext.Provider>
   )

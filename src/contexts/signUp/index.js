@@ -50,14 +50,6 @@ function SignupProvider({ children }) {
           alert(err);
         }
       } else {
-        let data = {
-          cellPhoneNumber: parseInt(cellphone),
-          email: email,
-          DDD: parseInt(ddd),
-          name: name,
-          username: nickname,
-          photos: photo["uri"],
-        };
         try {
           
           const response = await api.post("/login/signup/user", {cellPhoneNumber: parseInt(cellphone),
