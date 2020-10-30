@@ -7,6 +7,7 @@ import Routes from "./src/routes/index";
 import AuthProvider from "./src/contexts/auth";
 import SignUpProvider from "./src/contexts/signUp";
 import ManagerProvider from "./src/contexts/userManagerInfo/index";
+import InfoProvider from "./src/contexts/userManagerInfo/info";
 
 import {
   useFonts,
@@ -32,7 +33,9 @@ export default function App() {
       <AuthProvider>
         <SignUpProvider>
           <ManagerProvider>
-            <Routes />
+            <InfoProvider>
+              <Routes />
+            </InfoProvider>
           </ManagerProvider>
         </SignUpProvider>
       </AuthProvider>
