@@ -1,13 +1,10 @@
 import React,{useContext,useState,useEffect} from "react";
-import { FlatList } from 'react-native';
-
-import { AppLoading } from 'expo';
+import { View,FlatList,ActivityIndicator } from 'react-native';
 
 import { Tittle } from "../Perfil/styles";
 import { Container } from "../Login/styles";
-import {Cards} from "./components/Cards";
-import {ItemCard} from "./components/ItemsCard";
-
+import ItemCard from "./components/ItemCard";
+import {Blank} from "../Cadastro/styles";
 import {InfosContext} from "../../contexts/userManagerInfo/info";
 
 export default function Favorites() {
@@ -17,24 +14,49 @@ export default function Favorites() {
 
   useEffect(  ()=>{
       async function iniatilize (){
+        try{
       const lista = await getFavorites();
       setLista(lista);
       setLoading(true);
+        }
+        catch(err){
+          alert(err);
+        }
     }
    iniatilize();
   },[]);
+  useEffect(()=>{
+     async function update() {
+     try{
+    const lista = await getFavorites();
+      setLista(lista);
+      setLoading(true);
+    }
+    catch(err){
+      alert(err);
+    }
+  }
+  update();
+  },[lista])
 
   if(loading == false){
-    return <AppLoading/>
+    return (
+      <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
+        <ActivityIndicator color="#f16b4a" size={40} />
+      </View>
+    );
   }
   return (
-    <Container>
-      <Tittle>Lugares favoritos</Tittle>
-      <FlatList
-        data={lista}
-        keyExtractor={(item)=>item.Space_id}
-        renderItem={({item})=><ItemCard></ItemCard>}
-       />
-    </Container>
-  );
+      <Container>
+
+        <Tittle>Lugares favoritos</Tittle>
+        <FlatList
+          data={lista}
+          keyExtractor={(item)=>`"${item.Space_id}"`}
+          renderItem={({item})=><ItemCard data={item}/>}
+         />
+      </Container>
+    );
+  
+  
 }

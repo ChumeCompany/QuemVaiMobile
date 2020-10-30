@@ -7,6 +7,14 @@ export const InfosContext = createContext({});
 function InfoContextProvider({ children }) {
   const { token } = useContext(AuthContext);
 
+  async function removeFavorites(id){
+    try{
+      const response = await api.delete(`/favorites/remove/place/${id}`,{headers:{"x-auth-token":token}});
+    }
+    catch(err){
+      alert(err);
+    }
+  }
   async function getFavorites() {
     try {
       const response = await api.get("/favorites/get/place", {
@@ -18,7 +26,7 @@ function InfoContextProvider({ children }) {
     }
   }
   return (
-    <InfosContext.Provider value={{ getFavorites }}>
+    <InfosContext.Provider value={{ getFavorites,removeFavorites }}>
       {children}
     </InfosContext.Provider>
   );

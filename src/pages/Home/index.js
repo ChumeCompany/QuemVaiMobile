@@ -2,6 +2,7 @@ import React, { useContext, useEffect,useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { AppLoading } from 'expo';
+import { View,ActivityIndicator } from 'react-native';
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -34,7 +35,9 @@ initialize();
   }, []);
   if(load == false){
     return(
-    <AppLoading/>
+      <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
+      <ActivityIndicator color="#f16b4a" size={40} />
+    </View>
     );
   }
   return (

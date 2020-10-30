@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Platform } from "react-native";
+import { Platform, View,ActivityIndicator} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -25,7 +25,6 @@ import {
 } from "./styles";
 
 import { SignupContext } from "../../contexts/signUp";
-import { Image } from "react-native-svg";
 
 export default function Cadastro({ navigation }) {
   const { signUp } = useContext(SignupContext);
@@ -34,10 +33,10 @@ export default function Cadastro({ navigation }) {
   const [nickname, setNickname] = useState("");
   const [ddd, setDdd] = useState("");
   const [cellPhone, setCellPhone] = useState("");
-  //const [photo, setPhoto] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  var photo;
+  
 
   useEffect(() => {
     (async () => {
@@ -74,7 +73,8 @@ export default function Cadastro({ navigation }) {
     }
   }
 
-  function actionSignup() {
+ async function actionSignup() {
+    setLoading(false);
     if (confirmPassword != password) {
       alert("Sua senha está diferente");
     } else if (
@@ -87,13 +87,26 @@ export default function Cadastro({ navigation }) {
     ) {
       alert("Verifique se há campos em branco");
     } else {
-      signUp(email, name, nickname, ddd, cellPhone, password);
+      try{
+       await signUp(email, name, nickname, ddd, cellPhone, password);
+       setLoading(true);
+      }
+      catch(err){
+        alert(err);
+      }
     }
+  }
+  if(loading == false){
+    return(
+      <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
+        <ActivityIndicator color="#f16b4a" size={40} />
+      </View>
+    );
   }
   return (
     <Container>
-      <Bubble source={require("../../images/utils/Vector.png")} />
       <ScrollView>
+      <Bubble source={require("../../images/utils/Vector.png")} />
         <Tittle>Cadastre-se</Tittle>
         <Label>Email:</Label>
         <Input
