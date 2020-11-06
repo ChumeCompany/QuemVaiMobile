@@ -25,8 +25,17 @@ function InfoContextProvider({ children }) {
       alert(err);
     }
   }
+  async function getHistoric(){
+    try{
+      const response = await api.get("/historic/get/all",{headers:{"x-auth-token":token}});
+      return response.data;
+    }
+    catch(err){
+      alert(err);
+    }
+  }
   return (
-    <InfosContext.Provider value={{ getFavorites,removeFavorites }}>
+    <InfosContext.Provider value={{ getFavorites,removeFavorites,getHistoric }}>
       {children}
     </InfosContext.Provider>
   );

@@ -4,7 +4,7 @@ import { View,FlatList,ActivityIndicator } from 'react-native';
 import { Tittle } from "../Perfil/styles";
 import { Container } from "../Login/styles";
 import ItemCard from "./components/ItemCard";
-import {Blank} from "../Cadastro/styles";
+
 import {InfosContext} from "../../contexts/userManagerInfo/info";
 
 export default function Favorites() {
